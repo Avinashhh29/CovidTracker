@@ -1,10 +1,12 @@
 package com.example.myapplication.covid19.ui
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.covid19.databinding.ActivityMainBinding
@@ -23,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var country:String
     lateinit var covidPieChart: PieChart
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -65,10 +69,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 is Resource.Error->{
                     hideProgressBar()
+                    Intent(this, NoCountryActivity::class.java).also { startActivity(it)  }
                     response.data?.let { message->
                         Log.e(TAG,"An error occurred $message")
                     }
-
                 }
                 is Resource.Loading->{
                     showProgressBar()

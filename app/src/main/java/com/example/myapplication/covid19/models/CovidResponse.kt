@@ -23,6 +23,6 @@ data class CovidResponse(
     val todayCases: Int,
     val todayDeaths: Int,
     val todayRecovered: Int,
-    val undefined: Int,
+    val undefined: Float,
     val updated: Long
 )
